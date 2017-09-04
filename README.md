@@ -60,7 +60,7 @@ installation
 
     $ npm install geoip-lite
 
-### 2. update the datafiles (optional)
+### 2. update the datafiles
 
 Run `npm run-script updatedb` to update the data files.
 
