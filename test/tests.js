@@ -22,7 +22,7 @@ module.exports = {
 		test.expect(2);
 
 		var ip = "95.23.1.184";
-		var expected = "Logroño";
+		var expected = "Arnedo";
 		var actual = geoip.lookup(ip);
 
 		test.ok(actual, "Should return a non-null value for " + ip);
@@ -36,7 +36,7 @@ module.exports = {
 
 		var actual = geoip.lookup("23.240.63.68");
 
-		test.equal(actual.city, "Santa Ana");
+		test.equal(actual.city, "Perris");
 		test.equal(actual.metro, 803);
 
 		test.done();
