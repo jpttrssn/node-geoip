@@ -1,4 +1,5 @@
 var geoip = require('../lib/geoip');
+geoip.preload()
 
 module.exports = {
 	testLookup: function(test) {

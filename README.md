@@ -136,7 +136,7 @@ following files must exist at the endpoint:
     })
 ```
 
-This only updates the data files. You will still need to watch for data updates to get the new data loaded into memory.
+This will udpate files and load data into memory. 
 
 ### Start and stop watching for data updates ###
 
