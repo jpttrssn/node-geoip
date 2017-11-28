@@ -60,9 +60,9 @@ installation
 
     $ npm install geoip-lite
 
-### 2. update the datafiles (optional)
+### 2. update the datafiles
 
-Run `npm run-script updatedb` to update the data files.
+Run `npm run-script updatedb` or the `updateDb()` method from within your application to obtain or update the data files.
 
 **NOTE** that this requires a lot of RAM.  It is known to fail on on a Digital Ocean or AWS micro instance.
 There are no plans to change this.  `geoip-lite` stores all data in RAM in order to be fast.
@@ -116,6 +116,28 @@ the `pretty` method can be used to turn it into a human readable string.
 This method returns a string if the input was in a format that `geoip-lite` can recognise, else it returns the
 input itself.
 
+### Updating the data files from within your application ###
+
+You can update the data files from within your application and provide your own repository URL for the data.
+You can use this in combination with a mechanism to run this at a specific interval. If using a custom repository the 
+following files must exist at the endpoint:
+
+* [GeoIPCountryCSV.zip](https://geolite.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip)
+* [GeoIPv6.csv.gz](https://geolite.maxmind.com/download/geoip/database/GeoIPv6.csv.gz)
+* [GeoLiteCity-latest.zip](https://geolite.maxmind.com/download/geoip/database/GeoLiteCity_CSV/GeoLiteCity-latest.zip)
+* [GeoLiteCityv6.csv.gz](https://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/GeoLiteCityv6.csv.gz)
+
+```javascript
+    geoip.updateDb(function(err) {
+
+    })
+    geoip.updateDb('https://custom.url/path/', function(err) {
+
+    })
+```
+
+This will udpate files and load data into memory. 
+
 ### Start and stop watching for data updates ###
 
 If you have a server running `geoip-lite`, and you want to update its geo data without a restart, you can enable
@@ -125,7 +147,7 @@ the data watcher to automatically refresh in-memory geo data when a file changes
 geoip.startWatchingDataUpdate();
 ```
 
-This tool can be used with `npm run-script updatedb` to periodically update geo data on a running server.
+This tool can be used with `npm run-script updatedb` or the `updateDb()` method to periodically update geo data on a running server.
 
 
 Built-in Updater
@@ -147,10 +169,16 @@ node ./node_modules/geoip-lite/scripts/updatedb.js
 
 Or, if you really want, run the update once by `require('geoip-lite/scripts/updatedb.js')`.
 
+You can specify a custom repository URL with the first argument passed to the script.
+
+```bash
+node ./node_modules/geoip-lite/scripts/updatedb.js https://custom.url/path/
+```
+
 Caveats
 -------
 
-This package includes the GeoLite database from MaxMind.  This database is not the most accurate database available,
+This package uses the GeoLite database from MaxMind.  This database is not the most accurate database available,
 however it is the best available for free.  You can use the commercial GeoIP database from MaxMind with better
 accuracy by buying a license from MaxMind, and then using the conversion utility to convert it to a format that
 geoip-lite understands.  You will need to use the `.csv` files from MaxMind for conversion.

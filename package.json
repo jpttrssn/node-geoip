@@ -10,7 +10,7 @@
 	"repository"  :  { "type": "git", "url": "git://github.com/bluesmoon/node-geoip.git" },
 	"engines"     :  { "node": ">=5.10.0" },
 	"scripts": {
-		"test": "nodeunit --reporter=minimal test/tests.js",
+		"test": "node scripts/updatedb.js && nodeunit --reporter=minimal test/tests.js",
 		"updatedb": "node scripts/updatedb.js",
 		"updatedb-debug": "node scripts/updatedb.js debug"
 	},
