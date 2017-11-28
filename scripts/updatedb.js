@@ -1,5 +1,4 @@
 // fetches and converts maxmind lite databases
-
 'use strict';
 
 var updateDb = require('../lib/updateDb');
